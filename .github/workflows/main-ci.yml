@@ -1,0 +1,48 @@
+name: Eryth CI
+
+on:
+  push:
+    branches: [ main ] # Sadece main branch'ine push yapıldığında çalışsın
+  pull_request:
+    branches: [ main ] # Main branch'ine yönelik pull request'lerde de çalışsın
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest # İş akışının çalışacağı sanal makine işletim sistemi
+    defaults:
+      run:
+        working-directory: ./backend/Eryth.API # Backend proje dizini
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # Kodu sanal makineye indirir
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x' # Kullandığın .NET sürümüyle eşleşmeli (dotnet --version çıktısına bak)
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build backend
+      run: dotnet build --configuration Release --no-restore
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend/eryth-app # Frontend proje dizini
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.x' # Kullandığın Node.js sürümüyle eşleşmeli (node -v çıktısına bak, örneğin v20.x, v22.x gibi)
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build frontend
+      run: npm run build # Vite build komutu

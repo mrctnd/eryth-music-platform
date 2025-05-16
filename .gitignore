@@ -1,0 +1,26 @@
+# C# / .NET
+**/[Bb]in/
+**/[Oo]bj/
+**/[Dd]ebug/
+**/[Rr]elease/
+*.csproj.user
+*.sln.docstates
+*.suo
+*.user
+*.userosscache
+*.sln.ide
+.vs/
+project.lock.json
+project.assets.json
+
+# Node / Vite / React
+**/node_modules/
+**/dist/
+*.local
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+coverage/

@@ -1,0 +1,622 @@
+
+Enum "UserStatus" {
+  "active"
+  "suspended"
+  "deleted"
+  "pending_verification"
+}
+
+Enum "UserRole" {
+  "user"
+  "artist"
+  "admin"
+}
+
+Enum "MusicVisibility" {
+  "public"
+  "private"
+  "unlisted"
+}
+
+Enum "MusicStatus" {
+  "processing"
+  "active"
+  "failed_processing"
+  "taken_down_by_user"
+  "taken_down_by_admin"
+}
+
+Enum "AlbumType" {
+  "album"
+  "ep"
+  "single"
+  "compilation"
+}
+
+Enum "AlbumVisibility" {
+  "public"
+  "private"
+  "unlisted"
+}
+
+Enum "AlbumStatus" {
+  "draft"
+  "active"
+  "taken_down"
+}
+
+Enum "PlaylistVisibility" {
+  "public"
+  "private"
+  "collaborative"
+}
+
+Enum "PlaylistStatus" {
+  "active"
+  "archived"
+}
+
+Enum "PlaylistCollaboratorRole" {
+  "editor"
+  "viewer"
+}
+
+Enum "LikedEntityType" {
+  "Music"
+  "Album"
+  "Playlist"
+  "Comment"
+}
+
+Enum "CommentedEntityType" {
+  "Music"
+  "Album"
+  "Playlist"
+}
+
+Enum "CommentStatus" {
+  "active"
+  "hidden_by_user"
+  "deleted_by_moderator"
+}
+
+Enum "NotificationType" {
+  "USER_FOLLOWED_YOU"
+  "MUSIC_LIKED"
+  "ALBUM_LIKED"
+  "PLAYLIST_LIKED"
+  "COMMENT_LIKED"
+  "COMMENT_ON_YOUR_MUSIC"
+  "COMMENT_ON_YOUR_ALBUM"
+  "COMMENT_ON_YOUR_PLAYLIST"
+  "REPLY_TO_YOUR_COMMENT"
+  "NEW_MUSIC_BY_FOLLOWED_USER"
+  "NEW_ALBUM_BY_FOLLOWED_USER"
+}
+
+Enum "PrimaryEntityType" {
+  "User"
+  "Music"
+  "Album"
+  "Playlist"
+  "Comment"
+}
+
+Enum "ChatType" {
+  "one_to_one"
+}
+
+Enum "MessageType" {
+  "text"
+  "image_link"
+  "music_link"
+  "album_link"
+  "playlist_link"
+}
+
+Enum "MessageStatus" {
+  "sent"
+  "delivered_to_server"
+  "read_by_receiver"
+  "failed"
+}
+
+Enum "ActivityType" {
+  "USER_REGISTERED"
+  "USER_LOGGED_IN"
+  "USER_UPDATED_PROFILE"
+  "MUSIC_UPLOADED"
+  "MUSIC_PLAYED"
+  "ALBUM_CREATED"
+  "PLAYLIST_CREATED"
+  "ITEM_LIKED"
+  "ITEM_UNLIKED"
+  "COMMENT_POSTED"
+  "USER_FOLLOWED"
+  "USER_UNFOLLOWED"
+}
+
+Table "Users" {
+  "UserID" BIGSERIAL [pk, increment]
+  "Username" VARCHAR(50) [unique, not null]
+  "DisplayName" VARCHAR(100) [not null]
+  "Email" VARCHAR(255) [unique, not null]
+  "PasswordHash" TEXT [not null]
+  "ProfilePictureURL" TEXT
+  "CoverPhotoURL" TEXT
+  "Bio" TEXT
+  "Location" VARCHAR(100)
+  "WebsiteURL" TEXT
+  "Role" UserRole [not null, default: 'user']
+  "EmailVerified" BOOLEAN [not null, default: FALSE]
+  "EmailVerificationToken" TEXT
+  "PasswordResetToken" TEXT
+  "PasswordResetExpiresAt" TIMESTAMPTZ
+  "LastLoginDate" TIMESTAMPTZ
+  "Status" UserStatus [not null, default: 'pending_verification']
+  "PrivacySettings" JSONB
+  "CreatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "UpdatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    Email [name: "idx_users_email"]
+    Username [name: "idx_users_username"]
+    Status [name: "idx_users_status"]
+    PrivacySettings [type: gin, name: "idx_users_privacy_settings"]
+  }
+}
+
+Table "Genres" {
+  "GenreID" BIGSERIAL [pk, increment]
+  "Name" VARCHAR(100) [unique, not null]
+  "Slug" VARCHAR(100) [unique, not null]
+  "ParentGenreID" BIGINT
+  "Description" TEXT
+  "CoverImageURL" TEXT
+
+  Indexes {
+    ParentGenreID [name: "idx_genres_parent"]
+    Slug [name: "idx_genres_slug"]
+  }
+}
+
+Table "Moods" {
+  "MoodID" BIGSERIAL [pk, increment]
+  "Name" VARCHAR(100) [unique, not null]
+  "Slug" VARCHAR(100) [unique, not null]
+  "CoverImageURL" TEXT
+
+  Indexes {
+    Slug [name: "idx_moods_slug"]
+  }
+}
+
+Table "UserDefinedTags" {
+  "TagID" BIGSERIAL [pk, increment]
+  "Name" VARCHAR(50) [unique, not null]
+  "Slug" VARCHAR(50) [unique, not null]
+  "UsageCount" BIGINT [not null, default: 0]
+
+  Indexes {
+    Slug [name: "idx_tags_slug"]
+    UsageCount [name: "idx_tags_usage"]
+  }
+}
+
+Table "Albums" {
+  "AlbumID" BIGSERIAL [pk, increment]
+  "CreatorUserID" BIGINT [not null]
+  "Title" VARCHAR(255) [not null]
+  "AlbumType" AlbumType [not null]
+  "PrimaryArtistDisplayText" VARCHAR(255) [not null]
+  "CoverImageURL" TEXT
+  "Description" TEXT
+  "ReleaseDate" DATE
+  "GenreID" BIGINT
+  "UPC" VARCHAR(20)
+  "RecordLabelName" VARCHAR(100)
+  "Visibility" AlbumVisibility [not null, default: 'public']
+  "Status" AlbumStatus [not null, default: 'active']
+  "TotalPlayCount" BIGINT [not null, default: 0]
+  "TotalLikeCount" BIGINT [not null, default: 0]
+  "CreatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "UpdatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    CreatorUserID [name: "idx_albums_creator"]
+    GenreID [name: "idx_albums_genre"]
+    Visibility [name: "idx_albums_visibility"]
+    Status [name: "idx_albums_status"]
+    ReleaseDate [name: "idx_albums_release_date"]
+  }
+}
+
+Table "Musics" {
+  "MusicID" BIGSERIAL [pk, increment]
+  "UploaderUserID" BIGINT [not null]
+  "Title" VARCHAR(255) [not null]
+  "PrimaryArtistDisplayText" VARCHAR(255) [not null]
+  "FeaturedArtistsDisplayText" "TEXT[]"
+  "GenreID" BIGINT
+  "SubGenreID" BIGINT
+  "Tags" "TEXT[]"
+  "DurationSeconds" INTEGER [not null]
+  "AudioFilePath" TEXT [not null]
+  "WaveformDataPath" TEXT
+  "CoverImageURL" TEXT
+  "Description" TEXT
+  "Lyrics" TEXT
+  "ReleaseDate" DATE
+  "UploadDate" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "Visibility" MusicVisibility [not null, default: 'public']
+  "Status" MusicStatus [not null, default: 'processing']
+  "IsDownloadable" BOOLEAN [not null, default: FALSE]
+  "ISRC" VARCHAR(20)
+  "BPM" INTEGER
+  "KeySignature" VARCHAR(10)
+  "AudioFileFormat" VARCHAR(10)
+  "AudioBitrateKbitps" INTEGER
+  "AudioFileSizeMB" DECIMAL(10,2)
+  "PlayCount" BIGINT [not null, default: 0]
+  "LikeCount" BIGINT [not null, default: 0]
+  "CommentCount" BIGINT [not null, default: 0]
+  "RepostCount" BIGINT [not null, default: 0]
+  "CreatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "UpdatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    UploaderUserID [name: "idx_musics_uploader"]
+    GenreID [name: "idx_musics_genre"]
+    SubGenreID [name: "idx_musics_subgenre"]
+    Visibility [name: "idx_musics_visibility"]
+    Status [name: "idx_musics_status"]
+    ReleaseDate [name: "idx_musics_release_date"]
+    Tags [type: gin, name: "idx_musics_tags_array"]
+  }
+}
+
+Table "MusicMoods" {
+  "MusicMoodID" BIGSERIAL [pk, increment]
+  "MusicID" BIGINT [not null]
+  "MoodID" BIGINT [not null]
+
+  Indexes {
+    (MusicID, MoodID) [unique]
+    MusicID [name: "idx_music_moods_music"]
+    MoodID [name: "idx_music_moods_mood"]
+  }
+}
+
+Table "AlbumMusics" {
+  "AlbumMusicID" BIGSERIAL [pk, increment]
+  "AlbumID" BIGINT [not null]
+  "MusicID" BIGINT [not null]
+  "DiscNumber" INTEGER [not null, default: 1]
+  "TrackNumber" INTEGER [not null]
+
+  Indexes {
+    (AlbumID, MusicID) [unique]
+    (AlbumID, DiscNumber, TrackNumber) [unique]
+    AlbumID [name: "idx_album_musics_album"]
+    MusicID [name: "idx_album_musics_music"]
+  }
+}
+
+Table "MusicUserDefinedTags" {
+  "MusicTagID" BIGSERIAL [pk, increment]
+  "MusicID" BIGINT [not null]
+  "TagID" BIGINT [not null]
+
+  Indexes {
+    (MusicID, TagID) [unique]
+    MusicID [name: "idx_music_tags_music"]
+    TagID [name: "idx_music_tags_tag"]
+  }
+}
+
+Table "UserAuthenticationProviders" {
+  "UserAuthProviderID" BIGSERIAL [pk, increment]
+  "UserID" BIGINT [not null]
+  "ProviderName" VARCHAR(50) [not null]
+  "ProviderUserID" TEXT [not null]
+  "CreatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    (UserID, ProviderName) [unique]
+    (ProviderName, ProviderUserID) [unique]
+    UserID [name: "idx_auth_providers_user"]
+  }
+}
+
+Table "Playlists" {
+  "PlaylistID" BIGSERIAL [pk, increment]
+  "CreatorUserID" BIGINT [not null]
+  "Title" VARCHAR(150) [not null]
+  "Description" TEXT
+  "CoverImageURL" TEXT
+  "Visibility" PlaylistVisibility [not null, default: 'public']
+  "Status" PlaylistStatus [not null, default: 'active']
+  "CanSubscribersAddTracks" BOOLEAN [not null, default: FALSE]
+  "TotalDurationSeconds" INTEGER [not null, default: 0]
+  "TrackCount" INTEGER [not null, default: 0]
+  "FollowerCount" BIGINT [not null, default: 0]
+  "LikeCount" BIGINT [not null, default: 0]
+  "CreatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "UpdatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    CreatorUserID [name: "idx_playlists_creator"]
+    Visibility [name: "idx_playlists_visibility"]
+    Status [name: "idx_playlists_status"]
+  }
+}
+
+Table "PlaylistMusics" {
+  "PlaylistMusicID" BIGSERIAL [pk, increment]
+  "PlaylistID" BIGINT [not null]
+  "MusicID" BIGINT [not null]
+  "AddedByUserID" BIGINT [not null]
+  "AddedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "CustomOrder" INTEGER
+
+  Indexes {
+    (PlaylistID, MusicID) [unique]
+    PlaylistID [name: "idx_playlist_musics_playlist"]
+    MusicID [name: "idx_playlist_musics_music"]
+    AddedByUserID [name: "idx_playlist_musics_added_by"]
+  }
+}
+
+Table "PlaylistCollaborators" {
+  "PlaylistCollaboratorID" BIGSERIAL [pk, increment]
+  "PlaylistID" BIGINT [not null]
+  "UserID" BIGINT [not null]
+  "Role" PlaylistCollaboratorRole [not null, default: 'viewer']
+  "AddedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    (PlaylistID, UserID) [unique]
+    PlaylistID [name: "idx_playlist_collaborators_playlist"]
+    UserID [name: "idx_playlist_collaborators_user"]
+  }
+}
+
+Table "Likes" {
+  "LikeID" BIGSERIAL [pk, increment]
+  "UserID" BIGINT [not null]
+  "LikedEntityType" LikedEntityType [not null]
+  "LikedEntityID" BIGINT [not null]
+  "LikedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    (UserID, LikedEntityType, LikedEntityID) [unique]
+    UserID [name: "idx_likes_user"]
+    (LikedEntityType, LikedEntityID) [name: "idx_likes_entity"]
+    LikedAt [name: "idx_likes_timestamp"]
+  }
+}
+
+Table "Follows" {
+  "FollowID" BIGSERIAL [pk, increment]
+  "FollowerUserID" BIGINT [not null]
+  "FollowingUserID" BIGINT [not null]
+  "FollowedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    (FollowerUserID, FollowingUserID) [unique]
+    FollowerUserID [name: "idx_follows_follower"]
+    FollowingUserID [name: "idx_follows_following"]
+    FollowedAt [name: "idx_follows_timestamp"]
+  }
+}
+
+Table "Saves" {
+  "SaveID" BIGSERIAL [pk, increment]
+  "UserID" BIGINT [not null]
+  "SavedEntityType" LikedEntityType [not null]
+  "SavedEntityID" BIGINT [not null]
+  "SavedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    (UserID, SavedEntityType, SavedEntityID) [unique]
+    UserID [name: "idx_saves_user"]
+    (SavedEntityType, SavedEntityID) [name: "idx_saves_entity"]
+    SavedAt [name: "idx_saves_timestamp"]
+  }
+}
+
+Table "Comments" {
+  "CommentID" BIGSERIAL [pk, increment]
+  "UserID" BIGINT [not null]
+  "CommentedEntityType" CommentedEntityType [not null]
+  "CommentedEntityID" BIGINT [not null]
+  "ParentCommentID" BIGINT
+  "Text" TEXT [not null]
+  "Status" CommentStatus [not null, default: 'active']
+  "LikeCount" BIGINT [not null, default: 0]
+  "CommentedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "UpdatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    UserID [name: "idx_comments_user"]
+    (CommentedEntityType, CommentedEntityID) [name: "idx_comments_entity"]
+    ParentCommentID [name: "idx_comments_parent"]
+    Status [name: "idx_comments_status"]
+    CommentedAt [name: "idx_comments_timestamp"]
+  }
+}
+
+Table "Chats" {
+  "ChatID" UUID [pk, default: `gen_random_uuid()`]
+  "ChatType" ChatType [not null, default: 'one_to_one']
+  "LastMessageID" BIGINT
+  "LastMessageAt" TIMESTAMPTZ
+  "CreatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "UpdatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    LastMessageAt [name: "idx_chats_last_message_at"]
+  }
+}
+
+Table "Messages" {
+  "MessageID" BIGSERIAL [pk, increment]
+  "ChatID" UUID [not null]
+  "SenderUserID" BIGINT [not null]
+  "MessageType" MessageType [not null, default: 'text']
+  "ContentText" TEXT [not null]
+  "SentAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "Status" MessageStatus [not null, default: 'sent']
+  "DeletedForSender" BOOLEAN [not null, default: FALSE]
+  "DeletedForEveryone" BOOLEAN [not null, default: FALSE]
+
+  Indexes {
+    ChatID [name: "idx_messages_chat"]
+    SenderUserID [name: "idx_messages_sender"]
+    SentAt [name: "idx_messages_sent_at"]
+    Status [name: "idx_messages_status"]
+  }
+}
+
+Table "ChatParticipants" {
+  "ChatParticipantID" BIGSERIAL [pk, increment]
+  "ChatID" UUID [not null]
+  "UserID" BIGINT [not null]
+  "JoinedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "LastReadMessageID" BIGINT
+  "NotificationsEnabled" BOOLEAN [not null, default: TRUE]
+
+  Indexes {
+    (ChatID, UserID) [unique]
+    ChatID [name: "idx_chat_participants_chat"]
+    UserID [name: "idx_chat_participants_user"]
+    LastReadMessageID [name: "idx_chat_participants_last_read"]
+  }
+}
+
+Table "Notifications" {
+  "NotificationID" UUID [pk, default: `gen_random_uuid()`]
+  "ReceiverUserID" BIGINT [not null]
+  "NotificationType" NotificationType [not null]
+  "ActorUserID" BIGINT
+  "PrimaryEntityType" PrimaryEntityType
+  "PrimaryEntityID" BIGINT
+  "ContentText" TEXT
+  "LinkURL" TEXT
+  "IsRead" BOOLEAN [not null, default: FALSE]
+  "ReadAt" TIMESTAMPTZ
+  "CreatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    ReceiverUserID [name: "idx_notifications_receiver"]
+    ActorUserID [name: "idx_notifications_actor"]
+    IsRead [name: "idx_notifications_is_read"]
+    CreatedAt [name: "idx_notifications_created_at"]
+    (PrimaryEntityType, PrimaryEntityID) [name: "idx_notifications_entity"]
+  }
+}
+
+Table "UserActivityLog" {
+  "ActivityLogID" BIGSERIAL [pk, increment]
+  "UserID" BIGINT
+  "ActivityType" ActivityType [not null]
+  "PrimaryEntityType" PrimaryEntityType
+  "PrimaryEntityID" BIGINT
+  "Details" JSONB
+  "Timestamp" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    UserID [name: "idx_activity_log_user"]
+    Timestamp [name: "idx_activity_log_timestamp"]
+    ActivityType [name: "idx_activity_log_type"]
+    (PrimaryEntityType, PrimaryEntityID) [name: "idx_activity_log_entity"]
+    Details [type: gin, name: "idx_activity_log_details"]
+  }
+}
+
+Table "UserSessions" {
+  "SessionID" UUID [pk, default: `gen_random_uuid()`]
+  "UserID" BIGINT [not null]
+  "RefreshTokenHash" TEXT [not null]
+  "UserAgent" TEXT
+  "IPAddress" VARCHAR(45)
+  "ExpiresAt" TIMESTAMPTZ [not null]
+  "CreatedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+  "LastAccessedAt" TIMESTAMPTZ [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    UserID [name: "idx_user_sessions_user"]
+    ExpiresAt [name: "idx_user_sessions_expires"]
+    LastAccessedAt [name: "idx_user_sessions_last_accessed"]
+  }
+}
+
+Ref:"Genres"."GenreID" < "Genres"."ParentGenreID" [delete: set null]
+
+Ref:"Users"."UserID" < "Albums"."CreatorUserID" [delete: cascade]
+
+Ref:"Genres"."GenreID" < "Albums"."GenreID" [delete: set null]
+
+Ref:"Users"."UserID" < "Musics"."UploaderUserID" [delete: cascade]
+
+Ref:"Genres"."GenreID" < "Musics"."GenreID" [delete: set null]
+
+Ref:"Genres"."GenreID" < "Musics"."SubGenreID" [delete: set null]
+
+Ref:"Musics"."MusicID" < "MusicMoods"."MusicID" [delete: cascade]
+
+Ref:"Moods"."MoodID" < "MusicMoods"."MoodID" [delete: cascade]
+
+Ref:"Albums"."AlbumID" < "AlbumMusics"."AlbumID" [delete: cascade]
+
+Ref:"Musics"."MusicID" < "AlbumMusics"."MusicID" [delete: cascade]
+
+Ref:"Musics"."MusicID" < "MusicUserDefinedTags"."MusicID" [delete: cascade]
+
+Ref:"UserDefinedTags"."TagID" < "MusicUserDefinedTags"."TagID" [delete: cascade]
+
+Ref:"Users"."UserID" < "UserAuthenticationProviders"."UserID" [delete: cascade]
+
+Ref:"Users"."UserID" < "Playlists"."CreatorUserID" [delete: cascade]
+
+Ref:"Playlists"."PlaylistID" < "PlaylistMusics"."PlaylistID" [delete: cascade]
+
+Ref:"Musics"."MusicID" < "PlaylistMusics"."MusicID" [delete: cascade]
+
+Ref:"Users"."UserID" < "PlaylistMusics"."AddedByUserID" [delete: cascade]
+
+Ref:"Playlists"."PlaylistID" < "PlaylistCollaborators"."PlaylistID" [delete: cascade]
+
+Ref:"Users"."UserID" < "PlaylistCollaborators"."UserID" [delete: cascade]
+
+Ref:"Users"."UserID" < "Likes"."UserID" [delete: cascade]
+
+Ref:"Users"."UserID" < "Follows"."FollowerUserID" [delete: cascade]
+
+Ref:"Users"."UserID" < "Follows"."FollowingUserID" [delete: cascade]
+
+Ref:"Users"."UserID" < "Saves"."UserID" [delete: cascade]
+
+Ref:"Users"."UserID" < "Comments"."UserID" [delete: cascade]
+
+Ref:"Comments"."CommentID" < "Comments"."ParentCommentID" [delete: cascade]
+
+Ref:"Chats"."ChatID" < "Messages"."ChatID" [delete: cascade]
+
+Ref:"Users"."UserID" < "Messages"."SenderUserID" [delete: cascade]
+
+Ref:"Chats"."ChatID" < "ChatParticipants"."ChatID" [delete: cascade]
+
+Ref:"Users"."UserID" < "ChatParticipants"."UserID" [delete: cascade]
+
+Ref:"Messages"."MessageID" < "ChatParticipants"."LastReadMessageID" [delete: set null]
+
+Ref "fk_chats_last_message":"Messages"."MessageID" < "Chats"."LastMessageID" [delete: set null]
+
+Ref:"Users"."UserID" < "Notifications"."ReceiverUserID" [delete: cascade]
+
+Ref:"Users"."UserID" < "Notifications"."ActorUserID" [delete: set null]
+
+Ref:"Users"."UserID" < "UserActivityLog"."UserID" [delete: set null]
+
+Ref:"Users"."UserID" < "UserSessions"."UserID" [delete: cascade]

@@ -70,6 +70,7 @@ namespace Eryth.API.Data
                 entity.HasMany(g => g.SubGenreMusics).WithOne(m => m.SubGenre).HasForeignKey(m => m.SubGenreId).IsRequired(false).OnDelete(DeleteBehavior.SetNull);
                 entity.HasMany(g => g.Albums).WithOne(a => a.Genre).HasForeignKey(a => a.GenreId).IsRequired(false).OnDelete(DeleteBehavior.SetNull);
             });
+            
 
             modelBuilder.Entity<Mood>(entity =>
             {

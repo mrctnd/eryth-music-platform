@@ -38,6 +38,11 @@ builder.Services.AddDbContext<ErythDbContext>(options =>
 
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IMusicService, MusicService>();
+builder.Services.AddScoped<IAlbumService, AlbumService>();
+builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
+// Eğer IFileStorageService gibi ayrı bir servisiniz olursa onu da kaydedin:
+// builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
 
 // 5. JWT Kimlik Doğrulama Servislerini Ekle
 builder.Services.AddAuthentication(options =>
@@ -145,7 +150,7 @@ else
 }
 
 app.UseHttpsRedirection();
-
+app.UseStaticFiles(); // wwwroot klasöründeki dosyaların sunulmasını sağlar
 // ÖNEMLİ: Kimlik Doğrulama ve Yetkilendirme Middleware'leri
 // JWT token tabanlı kimlik doğrulamayı eklediğimizde bu satırların yorumunu kaldıracağız.
 app.UseAuthentication(); // Kimin istek attığını belirler

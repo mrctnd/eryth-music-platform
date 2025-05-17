@@ -40,6 +40,18 @@ namespace Eryth.API.Services
             {
                 return (false, "Müzik dosyası boş olamaz.", null);
             }
+            // Dosya boyutu kontrolü (250 MB)
+            if (musicCreateDto.MusicFile.Length > 250 * 1024 * 1024)
+            {
+                return (false, "Müzik dosyası en fazla 250 MB olabilir.", null);
+            }
+            // Dosya uzantısı kontrolü
+            var allowedExtensions = new[] { ".mp3", ".wav", ".flac" };
+            var fileExtension = Path.GetExtension(musicCreateDto.MusicFile.FileName).ToLowerInvariant();
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                return (false, $"Yalnızca şu uzantılara izin veriliyor: {string.Join(", ", allowedExtensions)}", null);
+            }
 
             var musicFileRelativeUrl = await _fileStorageService.SaveFileAsync(musicCreateDto.MusicFile, "music_files");
             if (string.IsNullOrEmpty(musicFileRelativeUrl))

@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Authorization; // [Authorize] attribute'ü için
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims; // User.FindFirstValue için
+using System;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Eryth.API.Controllers
 {
@@ -37,6 +41,32 @@ namespace Eryth.API.Controllers
                 Role = role
                 // Claims = allClaims // İsterseniz tüm claim'leri de dönebilirsiniz test için
             });
+        }
+
+        // GET api/users/me/activity-logs
+        [HttpGet("me/activity-logs")]
+        [Authorize]
+        public async Task<IActionResult> GetMyActivityLogs([FromServices] Eryth.API.Data.ErythDbContext dbContext)
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdStr) || !long.TryParse(userIdStr, out var userId))
+                return Unauthorized(new { message = "Kullanıcı kimliği token'da bulunamadı." });
+
+            var logs = await dbContext.UserActivityLogs
+                .Where(log => log.UserId == userId)
+                .OrderByDescending(log => log.Timestamp)
+                .Take(50)
+                .ToListAsync();
+
+            return Ok(logs);
+        }
+
+        // TEST: Global Exception Middleware çalışıyor mu?
+        [HttpGet("test-exception")]
+        [AllowAnonymous]
+        public IActionResult ThrowTestException()
+        {
+            throw new Exception("Test amaçlı fırlatılan exception.");
         }
     }
 }

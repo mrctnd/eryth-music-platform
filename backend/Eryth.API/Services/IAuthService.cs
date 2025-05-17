@@ -8,6 +8,7 @@ namespace Eryth.API.Services
     {
         Task<(bool Succeeded, string? ErrorMessage, User? User)> RegisterUserAsync(UserRegisterDto registerDto);
         Task<(bool Succeeded, string? ErrorMessage, AuthResponseDto? AuthResponse)> LoginUserAsync(UserLoginDto loginDto);
+        Task<(bool Succeeded, string? ErrorMessage, AuthResponseDto? AuthResponse)> RefreshTokenAsync(RefreshTokenRequestDto refreshTokenRequestDto);
         // string GenerateJwtToken(User user); // Token oluşturma bu serviste veya ayrı bir TokenService'te olabilir
     }
 }

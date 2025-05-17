@@ -1,0 +1,421 @@
+2025-05-17 20:15:59.548 +03:00 [INF] User profile is available. Using 'C:\Users\itach\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-17 20:15:59.616 +03:00 [INF] Now listening on: http://localhost:5175
+2025-05-17 20:15:59.618 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-17 20:15:59.619 +03:00 [INF] Hosting environment: Development
+2025-05-17 20:15:59.620 +03:00 [INF] Content root path: C:\Users\itach\eryth\backend\Eryth.API
+2025-05-17 20:16:14.431 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:16:14.448 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-05-17 20:16:14.464 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:16:14.472 +03:00 [INF] Route matched with {action = "ThrowTestException", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ThrowTestException() on controller Eryth.API.Controllers.UsersController (Eryth.API).
+2025-05-17 20:16:14.475 +03:00 [INF] Executed action Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API) in 0.7896ms
+2025-05-17 20:16:14.478 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:16:14.479 +03:00 [ERR] An unhandled exception occurred
+System.Exception: Test amaçlı fırlatılan exception.
+   at Eryth.API.Controllers.UsersController.ThrowTestException() in C:\Users\itach\eryth\backend\Eryth.API\Controllers\UsersController.cs:line 48
+   at lambda_method3(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Eryth.API.Middleware.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\itach\eryth\backend\Eryth.API\Middleware\GlobalExceptionMiddleware.cs:line 26
+2025-05-17 20:16:14.519 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 500 null application/json 89.4014ms
+2025-05-17 20:16:14.538 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/favicon.ico - null null
+2025-05-17 20:16:14.543 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/favicon.ico - 404 0 null 4.8195ms
+2025-05-17 20:16:14.546 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5175/favicon.ico, Response status code: 404
+2025-05-17 20:17:31.614 +03:00 [INF] Application is shutting down...
+2025-05-17 20:18:01.213 +03:00 [INF] User profile is available. Using 'C:\Users\itach\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-17 20:18:01.278 +03:00 [INF] Now listening on: http://localhost:5175
+2025-05-17 20:18:01.281 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-17 20:18:01.282 +03:00 [INF] Hosting environment: Development
+2025-05-17 20:18:01.282 +03:00 [INF] Content root path: C:\Users\itach\eryth\backend\Eryth.API
+2025-05-17 20:18:03.355 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:03.372 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-05-17 20:18:03.389 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:03.396 +03:00 [INF] Route matched with {action = "ThrowTestException", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ThrowTestException() on controller Eryth.API.Controllers.UsersController (Eryth.API).
+2025-05-17 20:18:03.400 +03:00 [INF] Executed action Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API) in 1.0782ms
+2025-05-17 20:18:03.404 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:03.405 +03:00 [ERR] An unhandled exception occurred
+System.Exception: Test amaçlı fırlatılan exception.
+   at Eryth.API.Controllers.UsersController.ThrowTestException() in C:\Users\itach\eryth\backend\Eryth.API\Controllers\UsersController.cs:line 48
+   at lambda_method3(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Eryth.API.Middleware.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\itach\eryth\backend\Eryth.API\Middleware\GlobalExceptionMiddleware.cs:line 26
+2025-05-17 20:18:03.442 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 500 null application/json 87.1509ms
+2025-05-17 20:18:18.288 +03:00 [INF] Application is shutting down...
+2025-05-17 20:18:53.693 +03:00 [INF] User profile is available. Using 'C:\Users\itach\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-17 20:18:53.759 +03:00 [INF] Now listening on: http://localhost:5175
+2025-05-17 20:18:53.762 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-17 20:18:53.763 +03:00 [INF] Hosting environment: Development
+2025-05-17 20:18:53.763 +03:00 [INF] Content root path: C:\Users\itach\eryth\backend\Eryth.API
+2025-05-17 20:18:55.783 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:55.804 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-05-17 20:18:55.820 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:55.830 +03:00 [INF] Route matched with {action = "ThrowTestException", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ThrowTestException() on controller Eryth.API.Controllers.UsersController (Eryth.API).
+2025-05-17 20:18:55.834 +03:00 [INF] Executed action Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API) in 1.1675ms
+2025-05-17 20:18:55.841 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:55.843 +03:00 [ERR] An unhandled exception occurred
+System.Exception: Test amaçlı fırlatılan exception.
+   at Eryth.API.Controllers.UsersController.ThrowTestException() in C:\Users\itach\eryth\backend\Eryth.API\Controllers\UsersController.cs:line 48
+   at lambda_method3(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Eryth.API.Middleware.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\itach\eryth\backend\Eryth.API\Middleware\GlobalExceptionMiddleware.cs:line 26
+2025-05-17 20:18:55.886 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 500 null application/json 104.158ms
+2025-05-17 20:18:57.882 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:57.885 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:57.886 +03:00 [INF] Route matched with {action = "ThrowTestException", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ThrowTestException() on controller Eryth.API.Controllers.UsersController (Eryth.API).
+2025-05-17 20:18:57.887 +03:00 [INF] Executed action Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API) in 0.1518ms
+2025-05-17 20:18:57.888 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:57.888 +03:00 [ERR] An unhandled exception occurred
+System.Exception: Test amaçlı fırlatılan exception.
+   at Eryth.API.Controllers.UsersController.ThrowTestException() in C:\Users\itach\eryth\backend\Eryth.API\Controllers\UsersController.cs:line 48
+   at lambda_method3(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Eryth.API.Middleware.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\itach\eryth\backend\Eryth.API\Middleware\GlobalExceptionMiddleware.cs:line 26
+2025-05-17 20:18:57.892 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 500 null application/json 10.1036ms
+2025-05-17 20:18:58.090 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:58.093 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:58.093 +03:00 [INF] Route matched with {action = "ThrowTestException", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ThrowTestException() on controller Eryth.API.Controllers.UsersController (Eryth.API).
+2025-05-17 20:18:58.095 +03:00 [INF] Executed action Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API) in 0.1219ms
+2025-05-17 20:18:58.096 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:58.096 +03:00 [ERR] An unhandled exception occurred
+System.Exception: Test amaçlı fırlatılan exception.
+   at Eryth.API.Controllers.UsersController.ThrowTestException() in C:\Users\itach\eryth\backend\Eryth.API\Controllers\UsersController.cs:line 48
+   at lambda_method3(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Eryth.API.Middleware.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\itach\eryth\backend\Eryth.API\Middleware\GlobalExceptionMiddleware.cs:line 26
+2025-05-17 20:18:58.100 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 500 null application/json 9.8397ms
+2025-05-17 20:18:58.257 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:58.258 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:58.259 +03:00 [INF] Route matched with {action = "ThrowTestException", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ThrowTestException() on controller Eryth.API.Controllers.UsersController (Eryth.API).
+2025-05-17 20:18:58.260 +03:00 [INF] Executed action Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API) in 0.1113ms
+2025-05-17 20:18:58.261 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:58.261 +03:00 [ERR] An unhandled exception occurred
+System.Exception: Test amaçlı fırlatılan exception.
+   at Eryth.API.Controllers.UsersController.ThrowTestException() in C:\Users\itach\eryth\backend\Eryth.API\Controllers\UsersController.cs:line 48
+   at lambda_method3(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Eryth.API.Middleware.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\itach\eryth\backend\Eryth.API\Middleware\GlobalExceptionMiddleware.cs:line 26
+2025-05-17 20:18:58.265 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 500 null application/json 7.6095ms
+2025-05-17 20:18:58.400 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:58.402 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:58.402 +03:00 [INF] Route matched with {action = "ThrowTestException", controller = "Users"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult ThrowTestException() on controller Eryth.API.Controllers.UsersController (Eryth.API).
+2025-05-17 20:18:58.403 +03:00 [INF] Executed action Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API) in 0.1085ms
+2025-05-17 20:18:58.404 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.UsersController.ThrowTestException (Eryth.API)'
+2025-05-17 20:18:58.404 +03:00 [ERR] An unhandled exception occurred
+System.Exception: Test amaçlı fırlatılan exception.
+   at Eryth.API.Controllers.UsersController.ThrowTestException() in C:\Users\itach\eryth\backend\Eryth.API\Controllers\UsersController.cs:line 48
+   at lambda_method3(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at Eryth.API.Middleware.GlobalExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\itach\eryth\backend\Eryth.API\Middleware\GlobalExceptionMiddleware.cs:line 26
+2025-05-17 20:18:58.408 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 500 null application/json 7.9819ms
+2025-05-17 20:18:58.546 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:58.548 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 429 0 null 2.3813ms
+2025-05-17 20:18:58.692 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:58.694 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 429 0 null 1.3091ms
+2025-05-17 20:18:58.866 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/users/test-exception - null null
+2025-05-17 20:18:58.867 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/users/test-exception - 429 0 null 1.6418ms
+2025-05-17 20:19:02.215 +03:00 [INF] Application is shutting down...
+2025-05-17 20:35:14.815 +03:00 [INF] User profile is available. Using 'C:\Users\itach\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-17 20:35:14.876 +03:00 [INF] Now listening on: http://localhost:5175
+2025-05-17 20:35:14.879 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-17 20:35:14.879 +03:00 [INF] Hosting environment: Development
+2025-05-17 20:35:14.880 +03:00 [INF] Content root path: C:\Users\itach\eryth\backend\Eryth.API
+2025-05-17 20:35:43.687 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/api/ - null null
+2025-05-17 20:35:43.705 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-05-17 20:35:43.722 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/api/ - 404 0 null 35.498ms
+2025-05-17 20:35:43.733 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5175/api/, Response status code: 404
+2025-05-17 20:35:48.273 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/swagger/ - null null
+2025-05-17 20:35:48.279 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/swagger/ - 301 0 null 6.4025ms
+2025-05-17 20:35:48.283 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/swagger/index.html - null null
+2025-05-17 20:35:48.313 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/swagger/index.html - 200 null text/html;charset=utf-8 30.232ms
+2025-05-17 20:35:48.406 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/swagger/v1/swagger.json - null null
+2025-05-17 20:35:48.468 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 62.6354ms
+2025-05-17 20:36:00.701 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/login - application/json 57
+2025-05-17 20:36:00.707 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:36:00.710 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.Login (Eryth.API)'
+2025-05-17 20:36:00.723 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Eryth.API.DTOs.UserLoginDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:36:01.127 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-05-17 20:36:01.459 +03:00 [INF] Executed DbCommand (24ms) [Parameters=[@__loginDto_LoginCredential_0='mirac', @__loginDto_LoginCredential_0_1='mirac'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.bio, u.cover_photo_url, u.created_at, u.display_name, u.email, u.email_verification_token, u.email_verified, u.last_login_date, u.location, u.password_hash, u.password_reset_expires_at, u.password_reset_token, u.privacy_settings, u.profile_picture_url, u.role, u.status, u.updated_at, u.username, u.website_url
+FROM users AS u
+WHERE u.username = @__loginDto_LoginCredential_0 OR u.email = @__loginDto_LoginCredential_0_1
+LIMIT 1
+2025-05-17 20:36:01.760 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p19='1', @p0=NULL, @p1=NULL, @p2='2025-05-17T15:02:04.4745730Z' (DbType = DateTime), @p3='mirac' (Nullable = false), @p4='mirac@example.com' (Nullable = false), @p5=NULL, @p6='False', @p7='2025-05-17T17:36:01.7140107Z' (Nullable = true) (DbType = DateTime), @p8=NULL, @p9='$2a$11$jYBkDRGYl0isrYcb8/b/Xe0Gl7cCenxC9QXgDILygcSzJvePmbIkW' (Nullable = false), @p10=NULL (DbType = DateTime), @p11=NULL, @p12=NULL (DbType = Object), @p13=NULL, @p14='0', @p15='0', @p16='2025-05-17T15:02:04.4745830Z' (DbType = DateTime), @p17='mirac' (Nullable = false), @p18=NULL], CommandType='"Text"', CommandTimeout='30']
+UPDATE users SET bio = @p0, cover_photo_url = @p1, created_at = @p2, display_name = @p3, email = @p4, email_verification_token = @p5, email_verified = @p6, last_login_date = @p7, location = @p8, password_hash = @p9, password_reset_expires_at = @p10, password_reset_token = @p11, privacy_settings = @p12, profile_picture_url = @p13, role = @p14, status = @p15, updated_at = @p16, username = @p17, website_url = @p18
+WHERE user_id = @p19;
+2025-05-17 20:36:01.768 +03:00 [INF] Executing OkObjectResult, writing value of type 'Eryth.API.DTOs.AuthResponseDto'.
+2025-05-17 20:36:01.778 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.Login (Eryth.API) in 1048.9811ms
+2025-05-17 20:36:01.779 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.Login (Eryth.API)'
+2025-05-17 20:36:01.784 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/login - 200 null application/json; charset=utf-8 1083.2985ms
+2025-05-17 20:36:17.878 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - application/json 388
+2025-05-17 20:36:17.884 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:36:17.886 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:36:17.890 +03:00 [INF] Route matched with {action = "RefreshToken", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RefreshToken(Eryth.API.DTOs.RefreshTokenRequestDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:36:18.093 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__refreshTokenHash_0='$2a$11$rYgx3zFARaah8jzC2DcjP.3Q02sNPNA5P37uT5AFQiHgjqTWWbLTK'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.session_id, u.created_at, u.expires_at, u.ip_address, u.last_accessed_at, u.refresh_token_hash, u.user_agent, u.user_id, u0.user_id, u0.bio, u0.cover_photo_url, u0.created_at, u0.display_name, u0.email, u0.email_verification_token, u0.email_verified, u0.last_login_date, u0.location, u0.password_hash, u0.password_reset_expires_at, u0.password_reset_token, u0.privacy_settings, u0.profile_picture_url, u0.role, u0.status, u0.updated_at, u0.username, u0.website_url
+FROM user_sessions AS u
+INNER JOIN users AS u0 ON u.user_id = u0.user_id
+WHERE u.refresh_token_hash = @__refreshTokenHash_0
+LIMIT 1
+2025-05-17 20:36:18.095 +03:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-17 20:36:18.097 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API) in 205.1164ms
+2025-05-17 20:36:18.098 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:36:18.099 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - 401 null application/json; charset=utf-8 220.3762ms
+2025-05-17 20:36:36.407 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - application/json 28
+2025-05-17 20:36:36.411 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:36:36.412 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:36:36.415 +03:00 [INF] Route matched with {action = "RefreshToken", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RefreshToken(Eryth.API.DTOs.RefreshTokenRequestDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:36:36.551 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__refreshTokenHash_0='$2a$11$oGeVqeo/11NZpIKHzyq1Ye7OQgrSMqhCvI86MD0nvaZQ5HjkjhofW'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.session_id, u.created_at, u.expires_at, u.ip_address, u.last_accessed_at, u.refresh_token_hash, u.user_agent, u.user_id, u0.user_id, u0.bio, u0.cover_photo_url, u0.created_at, u0.display_name, u0.email, u0.email_verification_token, u0.email_verified, u0.last_login_date, u0.location, u0.password_hash, u0.password_reset_expires_at, u0.password_reset_token, u0.privacy_settings, u0.profile_picture_url, u0.role, u0.status, u0.updated_at, u0.username, u0.website_url
+FROM user_sessions AS u
+INNER JOIN users AS u0 ON u.user_id = u0.user_id
+WHERE u.refresh_token_hash = @__refreshTokenHash_0
+LIMIT 1
+2025-05-17 20:36:36.553 +03:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-17 20:36:36.553 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API) in 136.2533ms
+2025-05-17 20:36:36.554 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:36:36.554 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - 401 null application/json; charset=utf-8 147.5242ms
+2025-05-17 20:36:59.218 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - application/json 395
+2025-05-17 20:36:59.224 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:36:59.225 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:36:59.226 +03:00 [INF] Route matched with {action = "RefreshToken", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RefreshToken(Eryth.API.DTOs.RefreshTokenRequestDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:36:59.327 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__refreshTokenHash_0='$2a$11$qEcwLeQv6sw3IvUgKi1oe.h1XfD1y86O5wwHEe5IARfEDO4O9Vn4W'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.session_id, u.created_at, u.expires_at, u.ip_address, u.last_accessed_at, u.refresh_token_hash, u.user_agent, u.user_id, u0.user_id, u0.bio, u0.cover_photo_url, u0.created_at, u0.display_name, u0.email, u0.email_verification_token, u0.email_verified, u0.last_login_date, u0.location, u0.password_hash, u0.password_reset_expires_at, u0.password_reset_token, u0.privacy_settings, u0.profile_picture_url, u0.role, u0.status, u0.updated_at, u0.username, u0.website_url
+FROM user_sessions AS u
+INNER JOIN users AS u0 ON u.user_id = u0.user_id
+WHERE u.refresh_token_hash = @__refreshTokenHash_0
+LIMIT 1
+2025-05-17 20:36:59.330 +03:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-17 20:36:59.331 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API) in 101.9808ms
+2025-05-17 20:36:59.332 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:36:59.332 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - 401 null application/json; charset=utf-8 113.7558ms
+2025-05-17 20:37:45.951 +03:00 [INF] Application is shutting down...
+2025-05-17 20:38:38.041 +03:00 [INF] User profile is available. Using 'C:\Users\itach\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-17 20:38:38.108 +03:00 [INF] Now listening on: http://localhost:5175
+2025-05-17 20:38:38.112 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-17 20:38:38.114 +03:00 [INF] Hosting environment: Development
+2025-05-17 20:38:38.115 +03:00 [INF] Content root path: C:\Users\itach\eryth\backend\Eryth.API
+2025-05-17 20:38:39.787 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/swagger/index.html - null null
+2025-05-17 20:38:39.828 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/swagger/index.html - 200 null text/html;charset=utf-8 41.4168ms
+2025-05-17 20:38:39.902 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/swagger/v1/swagger.json - null null
+2025-05-17 20:38:39.968 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 66.7761ms
+2025-05-17 20:38:47.596 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/login - application/json 57
+2025-05-17 20:38:47.604 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:38:47.606 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-05-17 20:38:47.625 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.Login (Eryth.API)'
+2025-05-17 20:38:47.641 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Eryth.API.DTOs.UserLoginDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:38:48.031 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-05-17 20:38:48.471 +03:00 [INF] Executed DbCommand (22ms) [Parameters=[@__loginDto_LoginCredential_0='mirac', @__loginDto_LoginCredential_0_1='mirac'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.bio, u.cover_photo_url, u.created_at, u.display_name, u.email, u.email_verification_token, u.email_verified, u.last_login_date, u.location, u.password_hash, u.password_reset_expires_at, u.password_reset_token, u.privacy_settings, u.profile_picture_url, u.role, u.status, u.updated_at, u.username, u.website_url
+FROM users AS u
+WHERE u.username = @__loginDto_LoginCredential_0 OR u.email = @__loginDto_LoginCredential_0_1
+LIMIT 1
+2025-05-17 20:38:48.971 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@p0='89c029f3-d0eb-4499-9dde-9d1aafc0e0f8', @p1='2025-05-17T17:38:48.8837316Z' (DbType = DateTime), @p2='2025-05-24T17:38:48.8837213Z' (DbType = DateTime), @p3=NULL, @p4='2025-05-17T17:38:48.8837383Z' (DbType = DateTime), @p5='$2a$11$4mceVfg4fU5haNaaI9XcYOk4VoxRhod.GOu7dKxGdo.q.vWVY8VqK' (Nullable = false), @p6=NULL, @p7='1', @p27='1', @p8=NULL, @p9=NULL, @p10='2025-05-17T15:02:04.4745730Z' (DbType = DateTime), @p11='mirac' (Nullable = false), @p12='mirac@example.com' (Nullable = false), @p13=NULL, @p14='False', @p15='2025-05-17T17:38:48.9070290Z' (Nullable = true) (DbType = DateTime), @p16=NULL, @p17='$2a$11$jYBkDRGYl0isrYcb8/b/Xe0Gl7cCenxC9QXgDILygcSzJvePmbIkW' (Nullable = false), @p18=NULL (DbType = DateTime), @p19=NULL, @p20=NULL (DbType = Object), @p21=NULL, @p22='0', @p23='0', @p24='2025-05-17T15:02:04.4745830Z' (DbType = DateTime), @p25='mirac' (Nullable = false), @p26=NULL], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO user_sessions (session_id, created_at, expires_at, ip_address, last_accessed_at, refresh_token_hash, user_agent, user_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+UPDATE users SET bio = @p8, cover_photo_url = @p9, created_at = @p10, display_name = @p11, email = @p12, email_verification_token = @p13, email_verified = @p14, last_login_date = @p15, location = @p16, password_hash = @p17, password_reset_expires_at = @p18, password_reset_token = @p19, privacy_settings = @p20, profile_picture_url = @p21, role = @p22, status = @p23, updated_at = @p24, username = @p25, website_url = @p26
+WHERE user_id = @p27;
+2025-05-17 20:38:48.984 +03:00 [INF] Executing OkObjectResult, writing value of type 'Eryth.API.DTOs.AuthResponseDto'.
+2025-05-17 20:38:48.994 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.Login (Eryth.API) in 1346.7822ms
+2025-05-17 20:38:48.995 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.Login (Eryth.API)'
+2025-05-17 20:38:49.000 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/login - 200 null application/json; charset=utf-8 1404.1676ms
+2025-05-17 20:38:59.028 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - application/json 88
+2025-05-17 20:38:59.033 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:38:59.035 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:38:59.041 +03:00 [INF] Route matched with {action = "RefreshToken", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RefreshToken(Eryth.API.DTOs.RefreshTokenRequestDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:38:59.269 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__refreshTokenHash_0='$2a$11$fcUqr0NulO2OlUlCevkz9en6E6NOUXC7IBmgSl1f6uF2HH2Pt6lNC'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.session_id, u.created_at, u.expires_at, u.ip_address, u.last_accessed_at, u.refresh_token_hash, u.user_agent, u.user_id, u0.user_id, u0.bio, u0.cover_photo_url, u0.created_at, u0.display_name, u0.email, u0.email_verification_token, u0.email_verified, u0.last_login_date, u0.location, u0.password_hash, u0.password_reset_expires_at, u0.password_reset_token, u0.privacy_settings, u0.profile_picture_url, u0.role, u0.status, u0.updated_at, u0.username, u0.website_url
+FROM user_sessions AS u
+INNER JOIN users AS u0 ON u.user_id = u0.user_id
+WHERE u.refresh_token_hash = @__refreshTokenHash_0
+LIMIT 1
+2025-05-17 20:38:59.271 +03:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-17 20:38:59.272 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API) in 227.5622ms
+2025-05-17 20:38:59.273 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:38:59.274 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - 401 null application/json; charset=utf-8 246.2983ms
+2025-05-17 20:39:20.865 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - application/json 88
+2025-05-17 20:39:20.869 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:39:20.871 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:39:20.872 +03:00 [INF] Route matched with {action = "RefreshToken", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RefreshToken(Eryth.API.DTOs.RefreshTokenRequestDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:39:21.011 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__refreshTokenHash_0='$2a$11$2IJLJ1hfjd936L618Ie/Feb9Wh5jZ9aUApLftIjfuEL7ERNRYe76e'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.session_id, u.created_at, u.expires_at, u.ip_address, u.last_accessed_at, u.refresh_token_hash, u.user_agent, u.user_id, u0.user_id, u0.bio, u0.cover_photo_url, u0.created_at, u0.display_name, u0.email, u0.email_verification_token, u0.email_verified, u0.last_login_date, u0.location, u0.password_hash, u0.password_reset_expires_at, u0.password_reset_token, u0.privacy_settings, u0.profile_picture_url, u0.role, u0.status, u0.updated_at, u0.username, u0.website_url
+FROM user_sessions AS u
+INNER JOIN users AS u0 ON u.user_id = u0.user_id
+WHERE u.refresh_token_hash = @__refreshTokenHash_0
+LIMIT 1
+2025-05-17 20:39:21.014 +03:00 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-17 20:39:21.015 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API) in 140.5481ms
+2025-05-17 20:39:21.017 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:39:21.018 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - 401 null application/json; charset=utf-8 153.5877ms
+2025-05-17 20:39:39.165 +03:00 [INF] Application is shutting down...
+2025-05-17 20:41:04.244 +03:00 [INF] User profile is available. Using 'C:\Users\itach\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-17 20:41:04.315 +03:00 [INF] Now listening on: http://localhost:5175
+2025-05-17 20:41:04.318 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-17 20:41:04.319 +03:00 [INF] Hosting environment: Development
+2025-05-17 20:41:04.320 +03:00 [INF] Content root path: C:\Users\itach\eryth\backend\Eryth.API
+2025-05-17 20:41:06.110 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/swagger/index.html - null null
+2025-05-17 20:41:06.157 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/swagger/index.html - 200 null text/html;charset=utf-8 47.2769ms
+2025-05-17 20:41:06.239 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/swagger/v1/swagger.json - null null
+2025-05-17 20:41:06.309 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 71.1287ms
+2025-05-17 20:41:17.113 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/login - application/json 57
+2025-05-17 20:41:17.125 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:41:17.128 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-05-17 20:41:17.161 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.Login (Eryth.API)'
+2025-05-17 20:41:17.184 +03:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Eryth.API.DTOs.UserLoginDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:41:17.652 +03:00 [WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+2025-05-17 20:41:18.049 +03:00 [INF] Executed DbCommand (36ms) [Parameters=[@__loginDto_LoginCredential_0='mirac', @__loginDto_LoginCredential_0_1='mirac'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.bio, u.cover_photo_url, u.created_at, u.display_name, u.email, u.email_verification_token, u.email_verified, u.last_login_date, u.location, u.password_hash, u.password_reset_expires_at, u.password_reset_token, u.privacy_settings, u.profile_picture_url, u.role, u.status, u.updated_at, u.username, u.website_url
+FROM users AS u
+WHERE u.username = @__loginDto_LoginCredential_0 OR u.email = @__loginDto_LoginCredential_0_1
+LIMIT 1
+2025-05-17 20:41:18.607 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='bd0717f4-db26-41a6-bb9d-f7673193b5c1', @p1='2025-05-17T17:41:18.5213041Z' (DbType = DateTime), @p2='2025-05-24T17:41:18.5212942Z' (DbType = DateTime), @p3=NULL, @p4='2025-05-17T17:41:18.5213109Z' (DbType = DateTime), @p5='$2a$11$kXU1BCOjVmEzMr4RgfIwnuQnDOc3vdCivwcwJfyNVzdEEssqSlZ76' (Nullable = false), @p6=NULL, @p7='1', @p27='1', @p8=NULL, @p9=NULL, @p10='2025-05-17T15:02:04.4745730Z' (DbType = DateTime), @p11='mirac' (Nullable = false), @p12='mirac@example.com' (Nullable = false), @p13=NULL, @p14='False', @p15='2025-05-17T17:41:18.5489316Z' (Nullable = true) (DbType = DateTime), @p16=NULL, @p17='$2a$11$jYBkDRGYl0isrYcb8/b/Xe0Gl7cCenxC9QXgDILygcSzJvePmbIkW' (Nullable = false), @p18=NULL (DbType = DateTime), @p19=NULL, @p20=NULL (DbType = Object), @p21=NULL, @p22='0', @p23='0', @p24='2025-05-17T15:02:04.4745830Z' (DbType = DateTime), @p25='mirac' (Nullable = false), @p26=NULL], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO user_sessions (session_id, created_at, expires_at, ip_address, last_accessed_at, refresh_token_hash, user_agent, user_id)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+UPDATE users SET bio = @p8, cover_photo_url = @p9, created_at = @p10, display_name = @p11, email = @p12, email_verification_token = @p13, email_verified = @p14, last_login_date = @p15, location = @p16, password_hash = @p17, password_reset_expires_at = @p18, password_reset_token = @p19, privacy_settings = @p20, profile_picture_url = @p21, role = @p22, status = @p23, updated_at = @p24, username = @p25, website_url = @p26
+WHERE user_id = @p27;
+2025-05-17 20:41:18.633 +03:00 [INF] Executing OkObjectResult, writing value of type 'Eryth.API.DTOs.AuthResponseDto'.
+2025-05-17 20:41:18.644 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.Login (Eryth.API) in 1455.251ms
+2025-05-17 20:41:18.646 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.Login (Eryth.API)'
+2025-05-17 20:41:18.651 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/login - 200 null application/json; charset=utf-8 1538.3321ms
+2025-05-17 20:41:27.843 +03:00 [INF] Request starting HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - application/json 88
+2025-05-17 20:41:27.852 +03:00 [INF] CORS policy execution successful.
+2025-05-17 20:41:27.855 +03:00 [INF] Executing endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:41:27.860 +03:00 [INF] Route matched with {action = "RefreshToken", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RefreshToken(Eryth.API.DTOs.RefreshTokenRequestDto) on controller Eryth.API.Controllers.AuthController (Eryth.API).
+2025-05-17 20:41:27.919 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='2025-05-17T17:41:27.8707078Z' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT u.session_id, u.created_at, u.expires_at, u.ip_address, u.last_accessed_at, u.refresh_token_hash, u.user_agent, u.user_id, u0.user_id, u0.bio, u0.cover_photo_url, u0.created_at, u0.display_name, u0.email, u0.email_verification_token, u0.email_verified, u0.last_login_date, u0.location, u0.password_hash, u0.password_reset_expires_at, u0.password_reset_token, u0.privacy_settings, u0.profile_picture_url, u0.role, u0.status, u0.updated_at, u0.username, u0.website_url
+FROM user_sessions AS u
+INNER JOIN users AS u0 ON u.user_id = u0.user_id
+WHERE u.expires_at > @__now_0
+2025-05-17 20:41:28.458 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@p7='bd0717f4-db26-41a6-bb9d-f7673193b5c1', @p0='2025-05-17T17:41:18.5213040Z' (DbType = DateTime), @p1='2025-05-24T17:41:28.4451271Z' (DbType = DateTime), @p2=NULL, @p3='2025-05-17T17:41:28.4451286Z' (DbType = DateTime), @p4='$2a$11$Qko2pxnJMRiY.KrmQwA5Fe/3TfUt781bxCPuc6ouNnPufus0EbxCy' (Nullable = false), @p5=NULL, @p6='1'], CommandType='"Text"', CommandTimeout='30']
+UPDATE user_sessions SET created_at = @p0, expires_at = @p1, ip_address = @p2, last_accessed_at = @p3, refresh_token_hash = @p4, user_agent = @p5, user_id = @p6
+WHERE session_id = @p7;
+2025-05-17 20:41:28.460 +03:00 [INF] Executing OkObjectResult, writing value of type 'Eryth.API.DTOs.AuthResponseDto'.
+2025-05-17 20:41:28.461 +03:00 [INF] Executed action Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API) in 597.4526ms
+2025-05-17 20:41:28.463 +03:00 [INF] Executed endpoint 'Eryth.API.Controllers.AuthController.RefreshToken (Eryth.API)'
+2025-05-17 20:41:28.464 +03:00 [INF] Request finished HTTP/1.1 POST http://localhost:5175/api/Auth/refresh-token - 200 null application/json; charset=utf-8 620.9167ms
+2025-05-17 20:41:33.485 +03:00 [INF] Application is shutting down...
+2025-05-17 20:52:32.977 +03:00 [INF] User profile is available. Using 'C:\Users\itach\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-17 20:52:33.058 +03:00 [INF] Now listening on: http://localhost:5175
+2025-05-17 20:52:33.062 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-17 20:52:33.062 +03:00 [INF] Hosting environment: Development
+2025-05-17 20:52:33.063 +03:00 [INF] Content root path: C:\Users\itach\eryth\backend\Eryth.API
+2025-05-17 20:52:36.857 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/health - null null
+2025-05-17 20:52:36.888 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-05-17 20:52:36.915 +03:00 [INF] Executing endpoint 'Health checks'
+2025-05-17 20:52:37.138 +03:00 [INF] Executed endpoint 'Health checks'
+2025-05-17 20:52:37.144 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/health - 200 null text/plain 287.9714ms
+2025-05-17 20:52:37.234 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/favicon.ico - null null
+2025-05-17 20:52:37.242 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/favicon.ico - 404 0 null 8.6294ms
+2025-05-17 20:52:37.247 +03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5175/favicon.ico, Response status code: 404
+2025-05-17 20:54:27.966 +03:00 [INF] Application is shutting down...
+2025-05-17 21:05:56.335 +03:00 [INF] User profile is available. Using 'C:\Users\itach\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-17 21:05:56.422 +03:00 [INF] Now listening on: http://localhost:5175
+2025-05-17 21:05:56.425 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-17 21:05:56.425 +03:00 [INF] Hosting environment: Development
+2025-05-17 21:05:56.426 +03:00 [INF] Content root path: C:\Users\itach\eryth\backend\Eryth.API
+2025-05-17 21:05:57.133 +03:00 [INF] Request starting HTTP/1.1 GET http://localhost:5175/metrics - null null
+2025-05-17 21:05:57.152 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-05-17 21:05:57.223 +03:00 [INF] Request finished HTTP/1.1 GET http://localhost:5175/metrics - 200 null text/plain; version=0.0.4; charset=utf-8 90.6712ms
+2025-05-17 21:06:11.474 +03:00 [INF] Application is shutting down...

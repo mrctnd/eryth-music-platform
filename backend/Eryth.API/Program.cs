@@ -7,8 +7,25 @@ using Microsoft.AspNetCore.Authentication.JwtBearer; // JwtBearerDefaults için
 using Microsoft.IdentityModel.Tokens; // SymmetricSecurityKey için
 using System.Text;
 using Microsoft.OpenApi.Models; // Swagger/OpenAPI için 
+using Eryth.API.Middleware; // GlobalExceptionMiddleware için
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.ResponseCompression;
+using Serilog;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Serilog yapılandırması
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/eryth-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.Seq("http://localhost:5341") // Seq sunucusu adresi
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // --- Servislerin Konteyner'a Eklenmesi ---
 
@@ -131,6 +148,61 @@ builder.Services.AddSwaggerGen(options =>
     // Diğer SwaggerGen seçenekleri (varsa)
 });
 
+// CORS servisini ekle
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DevCorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+    // Production için örnek:
+    // options.AddPolicy("ProdCorsPolicy", builder =>
+    // {
+    //     builder.WithOrigins("https://senin-frontend-domainin.com")
+    //            .AllowAnyHeader()
+    //            .AllowAnyMethod();
+    // });
+});
+
+// Rate Limiting servisini ekle
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+            factory: key => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 5, // Dakikada 5 istek
+                Window = TimeSpan.FromMinutes(1),
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0
+            }
+        ));
+    options.RejectionStatusCode = 429;
+});
+
+// Response Compression servisini ekle
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+    options.Providers.Add<BrotliCompressionProvider>();
+    options.Providers.Add<GzipCompressionProvider>();
+});
+
+builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
+{
+    options.Level = System.IO.Compression.CompressionLevel.Fastest;
+});
+
+builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+{
+    options.Level = System.IO.Compression.CompressionLevel.Fastest;
+});
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(connectionString, name: "Database");
 
 // --- Uygulamanın İnşa Edilmesi ---
 var app = builder.Build();
@@ -141,16 +213,49 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     app.UseDeveloperExceptionPage(); // Geliştirme sırasında detaylı hata sayfaları
+    // Geliştirme ortamında CORS'u aktif et
+    app.UseCors("DevCorsPolicy");
 }
 else
 {
     // Production ortamında daha genel bir hata handler'ı
     app.UseExceptionHandler("/Error"); // Örnek, özel bir endpoint'e yönlendirebilirsiniz
     app.UseHsts();
+    // Production için CORS'u aktif et (örnek)
+    // app.UseCors("ProdCorsPolicy");
+
+    // Swagger UI'ya erişimi kimliği doğrulanmış kullanıcılara aç
+    app.UseWhen(ctx => ctx.Request.Path.StartsWithSegments("/swagger"), subApp =>
+    {
+        subApp.UseAuthentication();
+        subApp.UseAuthorization();
+        subApp.Use(async (context, next) =>
+        {
+            if (!context.User.Identity?.IsAuthenticated ?? true)
+            {
+                context.Response.StatusCode = 401;
+                await context.Response.WriteAsync("Swagger UI sadece yetkili kullanıcılar için erişilebilir.");
+                return;
+            }
+            await next();
+        });
+    });
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+// Response Compression middleware'ini ekle (UseHttpsRedirection'dan önce)
+app.UseResponseCompression();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // wwwroot klasöründeki dosyaların sunulmasını sağlar
+
+// Global Exception Middleware'i ekle
+app.UseMiddleware<GlobalExceptionMiddleware>();
+
+// Rate Limiting middleware'i ekle
+app.UseRateLimiter();
+
 // ÖNEMLİ: Kimlik Doğrulama ve Yetkilendirme Middleware'leri
 // JWT token tabanlı kimlik doğrulamayı eklediğimizde bu satırların yorumunu kaldıracağız.
 app.UseAuthentication(); // Kimin istek attığını belirler
@@ -158,5 +263,12 @@ app.UseAuthorization();  // İstek atanın ne yapmaya yetkili olduğunu kontrol 
 
 // API Controller endpoint'lerini haritala
 app.MapControllers();
+
+// Health check endpoint
+app.MapHealthChecks("/health");
+
+// Prometheus metrikleri
+app.UseMetricServer(); // /metrics endpointi
+app.UseHttpMetrics(); // HTTP istek metrikleri
 
 app.Run();

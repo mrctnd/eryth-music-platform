@@ -74,5 +74,24 @@ namespace Eryth.API.Controllers
 
             return Unauthorized(new { message = "Giriş başarısız." }); // Genel yetkisiz erişim hatası
         }
+
+        // POST /api/auth/refresh-token
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDto refreshTokenRequestDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var (succeeded, errorMessage, authResponse) = await _authService.RefreshTokenAsync(refreshTokenRequestDto);
+
+            if (succeeded && authResponse != null)
+            {
+                return Ok(authResponse);
+            }
+
+            return Unauthorized(new { message = errorMessage ?? "Refresh token geçersiz veya süresi dolmuş." });
+        }
     }
 }

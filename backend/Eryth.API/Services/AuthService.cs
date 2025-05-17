@@ -58,6 +58,16 @@ namespace Eryth.API.Services
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
+            // Kullanıcı kayıt aktivitesini logla
+            var registerLog = new UserActivityLog
+            {
+                UserId = user.UserId,
+                ActivityType = ActivityType.UserRegistered,
+                Timestamp = DateTime.UtcNow
+            };
+            await _context.UserActivityLogs.AddAsync(registerLog);
+            await _context.SaveChangesAsync();
+
             return (true, null, user);
         }
 
@@ -89,6 +99,36 @@ namespace Eryth.API.Services
             // 4. JWT token üret
             var (tokenString, expiration) = GenerateJwtToken(user);
 
+            // 5. Refresh token üret
+            var refreshToken = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");
+            var refreshTokenHash = BCrypt.Net.BCrypt.HashPassword(refreshToken);
+            var userSession = new UserSession
+            {
+                UserId = user.UserId,
+                RefreshTokenHash = refreshTokenHash,
+                ExpiresAt = DateTime.UtcNow.AddDays(7),
+                CreatedAt = DateTime.UtcNow,
+                LastAccessedAt = DateTime.UtcNow,
+                UserAgent = null, // İsterseniz loginDto'dan veya header'dan alabilirsiniz
+                IpAddress = null  // İsterseniz loginDto'dan veya header'dan alabilirsiniz
+            };
+            await _context.UserSessions.AddAsync(userSession);
+
+            // Opsiyonel: LastLoginDate güncellemesi
+            user.LastLoginDate = DateTime.UtcNow;
+            _context.Users.Update(user);
+
+            // Kullanıcı giriş aktivitesini logla
+            var loginLog = new UserActivityLog
+            {
+                UserId = user.UserId,
+                ActivityType = ActivityType.UserLoggedIn,
+                Timestamp = DateTime.UtcNow
+            };
+            await _context.UserActivityLogs.AddAsync(loginLog);
+
+            await _context.SaveChangesAsync();
+
             var authResponse = new AuthResponseDto
             {
                 UserId = user.UserId.ToString(),
@@ -96,13 +136,64 @@ namespace Eryth.API.Services
                 DisplayName = user.DisplayName,
                 Email = user.Email,
                 Token = tokenString,
-                TokenExpiration = expiration
+                TokenExpiration = expiration,
+                RefreshToken = refreshToken
             };
 
-            // Opsiyonel: LastLoginDate güncellemesi
-            user.LastLoginDate = DateTime.UtcNow;
-            _context.Users.Update(user);
+            return (true, null, authResponse);
+        }
+
+        public async Task<(bool Succeeded, string? ErrorMessage, AuthResponseDto? AuthResponse)> RefreshTokenAsync(RefreshTokenRequestDto refreshTokenRequestDto)
+        {
+            if (string.IsNullOrWhiteSpace(refreshTokenRequestDto.RefreshToken))
+                return (false, "Refresh token gerekli.", null);
+
+            // Tüm aktif oturumları çek
+            var now = DateTime.UtcNow;
+            var userSessions = await _context.UserSessions
+                .Include(us => us.User)
+                .Where(us => us.ExpiresAt > now)
+                .ToListAsync();
+
+            UserSession? matchedSession = null;
+            foreach (var session in userSessions)
+            {
+                if (BCrypt.Net.BCrypt.Verify(refreshTokenRequestDto.RefreshToken, session.RefreshTokenHash))
+                {
+                    matchedSession = session;
+                    break;
+                }
+            }
+
+            if (matchedSession == null)
+                return (false, "Refresh token geçersiz veya süresi dolmuş.", null);
+
+            var user = matchedSession.User;
+            if (user == null)
+                return (false, "Kullanıcı bulunamadı.", null);
+
+            // Yeni access token üret
+            var (tokenString, expiration) = GenerateJwtToken(user);
+
+            // Yeni refresh token üret ve kaydet
+            var newRefreshToken = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N");
+            var newRefreshTokenHash = BCrypt.Net.BCrypt.HashPassword(newRefreshToken);
+            matchedSession.RefreshTokenHash = newRefreshTokenHash;
+            matchedSession.ExpiresAt = DateTime.UtcNow.AddDays(7);
+            matchedSession.LastAccessedAt = DateTime.UtcNow;
+            _context.UserSessions.Update(matchedSession);
             await _context.SaveChangesAsync();
+
+            var authResponse = new AuthResponseDto
+            {
+                UserId = user.UserId.ToString(),
+                Username = user.Username,
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Token = tokenString,
+                TokenExpiration = expiration,
+                RefreshToken = newRefreshToken
+            };
 
             return (true, null, authResponse);
         }
